@@ -54,7 +54,8 @@ export default function InventoryPage() {
   const upsertMutation = useMutation({
     mutationFn: (product: any) => invoke("upsert_product", { product }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products", "activity_logs"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["activity_logs"] });
       toast.success(editingProduct ? "Producto actualizado" : "Producto creado");
       setIsDialogOpen(false);
       setEditingProduct(null);
@@ -65,7 +66,8 @@ export default function InventoryPage() {
   const deleteMutation = useMutation({
     mutationFn: (id: i64) => invoke("delete_product", { id }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products", "activity_logs"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["activity_logs"] });
       toast.success("Producto eliminado");
     },
     onError: (err: any) => toast.error(`Error: ${err}`),

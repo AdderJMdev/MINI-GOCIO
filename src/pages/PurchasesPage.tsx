@@ -53,7 +53,10 @@ export default function PurchasesPage() {
   const purchaseMutation = useMutation({
     mutationFn: (purchase: any) => invoke("process_purchase", { purchase }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["purchases", "products", "dashboard_stats", "activity_logs"] });
+      queryClient.invalidateQueries({ queryKey: ["purchases"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard_stats"] });
+      queryClient.invalidateQueries({ queryKey: ["activity_logs"] });
       toast.success("Compra procesada con éxito");
       setIsDialogOpen(false);
       resetForm();

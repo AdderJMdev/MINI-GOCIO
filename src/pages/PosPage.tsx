@@ -40,7 +40,11 @@ export default function PosPage() {
       toast.success("Venta procesada con éxito");
       clearCart();
       setSelectedCustomerId(null);
-      queryClient.invalidateQueries({ queryKey: ["products", "dashboard_stats", "sales_by_day", "top_products", "activity_logs"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard_stats"] });
+      queryClient.invalidateQueries({ queryKey: ["sales_by_day"] });
+      queryClient.invalidateQueries({ queryKey: ["top_products"] });
+      queryClient.invalidateQueries({ queryKey: ["activity_logs"] });
     },
     onError: (err: any) => toast.error(`Error: ${err}`),
   });
